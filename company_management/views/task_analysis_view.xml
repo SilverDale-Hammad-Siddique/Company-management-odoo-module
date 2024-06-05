@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="crm_activity_report_view_pivot" model="ir.ui.view">
+        <field name="name">activity.report.pivot</field>
+        <field name="model">report.task</field>
+        <field name="arch" type="xml">
+            <pivot string="Tasks Analysis" display_quantity="1" sample="1">
+                <field name="project_idd" type="row"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_task_analysis_graph" model="ir.ui.view">
+        <field name="name">report.task.graph</field>
+        <field name="model">report.task</field>
+        <field name="arch" type="xml">
+            <graph string="Tasks Analysis" sample="1" disable_linking="1">
+                <field name="project_idd"/>
+<!--                <field name="stage_id"/>-->
+                <field name="nbr"/>
+            </graph>
+        </field>
+    </record>
+    <!--ACTION    -->
+    <record id="action_task_analysis" model="ir.actions.act_window">
+        <field name="name">Task Analysis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">report.task</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first task!
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_task_analysis"
+              name="Task Analysis"
+              action="action_task_analysis"
+              parent="menu_report_master"
+              sequence="0"
+    />
+</odoo>

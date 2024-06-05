@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <menuitem id="menu_company_root"
+              name="Company"
+              web_icon="company_management,static/description/icon.png"
+              sequence="0"/>
+
+    <menuitem id="menu_company_master"
+              name="Companies Detail"
+              parent="menu_company_root"
+              sequence="10"/>
+
+    <menuitem id="menu_employee_master"
+              name="Employees"
+              parent="menu_company_root"
+              sequence="100"/>
+
+    <menuitem id="menu_department_master"
+              name="Departments"
+              parent="menu_company_root"
+              sequence="200"/>
+
+    <menuitem id="menu_project_master"
+              name="Projects and Tasks"
+              parent="menu_company_root"
+              sequence="300"/>
+
+    <menuitem id="menu_report_master"
+              name="Reporting"
+              parent="menu_company_root"
+              sequence="400"/>
+
+    <menuitem id="menu_contact_master"
+              name="Contacts"
+              parent="menu_company_root"
+              sequence="500"/>
+
+
+
+    <menuitem id="menu_configration_master"
+              name="Configration"
+              parent="menu_company_root"
+              sequence="600"/>
+
+
+</odoo>

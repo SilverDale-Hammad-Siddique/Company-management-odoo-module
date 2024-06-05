@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!--ACTION    -->
+    <record id="action_project2" model="ir.actions.act_window">
+        <field name="name">Projects</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project</field>
+
+    </record>
+    <menuitem id="menu_project2"
+              name="Projects"
+              action="action_project2"
+              parent="menu_project_master"
+              sequence="10"
+    />
+</odoo>

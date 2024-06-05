@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="company_contact" model="ir.ui.view">
+            <field name="name">Contacts</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <sheet>
+                    <xpath expr="//field[@name='arch']" position="after">
+                        <tag name="sheet"/>
+                    </xpath>
+                </sheet>
+
+            </field>
+        </record>
+
+        <record id="action_contact" model="ir.actions.act_window">
+            <field name="name">Contacts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">search,kanban,tree,graph,activity,form</field>
+
+        </record>
+
+        <!-- Menu item for accessing employees -->
+        <menuitem id="menu_contact"
+                  name="Contacts"
+                  action="action_contact"
+                  parent="menu_contact_master"
+                  sequence="0"/>
+    </data>
+</odoo>

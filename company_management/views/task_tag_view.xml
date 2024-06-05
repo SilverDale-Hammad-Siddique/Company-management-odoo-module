@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_task_tag_tree" model="ir.ui.view">
+        <field name="name">task.tag.tree</field>
+        <field name="model">task.tag</field>
+        <field name="arch" type="xml">
+            <tree string="Task Tags">
+                <field name="name"/>
+                <field name="active"/>
+                <field name="color" widget="color_picker"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Task Tags -->
+    <record id="view_task_tag_form" model="ir.ui.view">
+        <field name="name">task.tag.form</field>
+        <field name="model">task.tag</field>
+        <field name="arch" type="xml">
+            <form string="Task Tag">
+                <sheet>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                                <field name="color" widget="color_picker"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_task_tag" model="ir.actions.act_window">
+        <field name="name">Tags</field>
+        <field name="res_model">task.tag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_task_tag_tree"/>
+    </record>
+
+
+    <menuitem id="menu_task_tag"
+              name="Tags"
+              parent="menu_configration_master"
+              action="action_task_tag"
+              sequence="20"/>
+
+</odoo>
+

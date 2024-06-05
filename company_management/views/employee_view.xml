@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_employee_filter" model="ir.ui.view">
+            <field name="name">Employees</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <search string="Employees">
+                    <filter string="My Employee" name="my_employee" domain="[('my_employee', '=', True)]"/>
+                    <searchpanel>
+                        <field name="company_idd" icon="fa-building"
+                               enable_counters="1"/>
+                        <field name="department_idd" icon="fa-users" enable_counters="1"/>
+                    </searchpanel>
+                </search>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_hr_employee_tree_inherit">
+            <field name="name">hr.employee.tree.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <header>
+                        <button name="%(company_management.action_print_employee_report)d" type="action"
+                                string="Print Employee Report" class="oe_stat_button" icon="fa-file-excel-o"/>
+                    </header>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="company_employee" model="ir.ui.view">
+            <field name="name">Company Employees</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='department_id']" position="replace">
+                    <field name="department_idd" options="{'no_open': True, 'no_create': True}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='department_idd']" position="before">
+                    <field name="my_employee"/>
+                </xpath>
+
+                <xpath expr="//field[@name='work_email']" position="after">
+                    <field name="company_idd"/>
+                </xpath>
+
+                <xpath expr="//field[@name='coach_id']" position="after">
+                    <field name="phone" string="Personal Phone" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//button[@name='597']" position="after">
+                    <header>
+                        <button name="action_share_whatsapp" string="Share In Whatsapp" type="object"
+                                class="oe_highlight"
+                                data-hotkey="w" icon="fa-whatsapp"/>
+                    </header>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="action_employee" model="ir.actions.act_window">
+            <field name="name">Employees</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">search,kanban,tree,activity,form</field>
+            <field name="context">{'search_default_my_employee':'True'}</field>
+        </record>
+
+        <record model="ir.actions.server" id="action_print_employee_report">
+            <field name="name">Print Employee Report</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="binding_model_id" ref="model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = {
+                'type': 'ir.actions.act_url',
+                'url': '/employee/report?employee_ids=%s' % (",".join(map(str, env.context.get('active_ids', [])))),
+                'target': 'self',
+                }
+            </field>
+        </record>
+
+
+        <menuitem id="menu_employee"
+                  name="Employees"
+                  action="action_employee"
+                  parent="menu_employee_master"
+                  sequence="0"/>
+
+    </data>
+</odoo>

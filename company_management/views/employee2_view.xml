@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_employee2" model="ir.actions.act_window">
+            <field name="name">Employees</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee</field>
+        </record>
+
+        <!-- Menu item for accessing employees -->
+        <menuitem id="menu_employee2"
+                  name="Employees"
+                  action="action_employee2"
+                  parent="menu_employee_master"
+                  sequence="10"/>
+    </data>
+</odoo>

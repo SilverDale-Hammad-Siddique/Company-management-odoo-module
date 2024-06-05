@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record model="ir.ui.view" id="res_partner_kanban_view">
+        <field name="name">department.kanban</field>
+        <field name="model">department</field>
+        <field name="arch" type="xml">
+            <kanban class="oe_background_grey o_kanban_dashboard o_hr_department_kanban o_kanban_small_column"
+                    sample="1">
+                <field name="name"/>
+                <field name="company_idd"/>
+                <field name="manager_id"/>
+                <field name="color"/>
+                <field name="total_employee"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''}">
+                            <div t-attf-class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title">
+                                    <div class="o_primary">
+                                        <a type="edit">
+                                            <field name="name"/>
+                                        </a>
+                                    </div>
+                                    <div class="o_secondary" groups="base.group_multi_company">
+                                        <small>
+                                            <i class="fa fa-building-o" role="img" aria-label="Company"
+                                               title="Company"/>
+                                            <field name="company_idd"/>
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_manage_button_section" t-if="!selection_mode">
+                                    <a class="o_kanban_manage_toggle_button" href="#">
+                                        <i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/>
+                                    </a>
+                                    <ul t-if="widget.editable" class="oe_kanban_colorpicker" data-field="color"
+                                        role="menu"/>
+                                </div>
+                            </div>
+                            <div class="container o_kanban_card_content" t-if="!selection_mode">
+                                <div class="row o_kanban_card_upper_content">
+                                    <div class="col-6 o_kanban_primary_left">
+                                        <button class="btn btn-primary" name="611" type="action">
+                                            <t t-out="record.total_employee.raw_value"/>
+                                            Employees
+                                        </button>
+                                    </div>
+                                    <div class="col-6 o_kanban_primary_right">
+                                    </div>
+                                </div>
+                                <div class="o_kanban_card_lower_content" style="justify-content: end">
+                                    <!-- placeholder for bottom content -->
+                                </div>
+                            </div>
+                            <div class="o_kanban_card_manage_pane dropdown-menu" role="menu">
+                                <div class="o_kanban_card_manage_section">
+                                    <div role="menuitem" class="o_kanban_manage_reports">
+                                        <div class="o_kanban_card_manage_title ps-4 pb-1">
+                                            <span class="fw-bolder">Reporting</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a t-if="widget.editable" role="menuitem" class="dropdown-item" type="edit">
+                                    Configuration
+                                </a>
+                                <ul t-if="widget.editable" class="oe_kanban_colorpicker" data-field="color"
+                                    role="menu"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_department_tree" model="ir.ui.view">
+        <field name="name">department.tree</field>
+        <field name="model">department</field>
+        <field name="arch" type="xml">
+            <tree string="Departments">
+                <field name="name" string="Display Name" decoration-success="1"/>
+                <field name="company_idd" string="Company" decoration-info="1"/>
+                <field name="manager_id" decoration-success="1"/>
+                <field name="employee_count" decoration-danger="1"/>
+                <field name="parent_id" decoration-info="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_department_form" model="ir.ui.view">
+        <field name="name">department.form</field>
+        <field name="model">department</field>
+        <field name="arch" type="xml">
+            <form string="Department">
+                <sheet>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h2>
+                                <field name="name" placeholder="Your company department" string="Department Name"/>
+                            </h2>
+                        </div>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <group>
+                            <group>
+                                <field name="manager_id"/>
+                                <field name="label_employee"/>
+                                <field name="parent_id"/>
+                                <field name="company_idd" options="{'no_create': True}"/>
+                                <field name="employee_count"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--ACTION    -->
+    <record id="action_department" model="ir.actions.act_window">
+        <field name="name">Departments</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">department</field>
+        <field name="view_mode">kanban,tree,form</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Employee!
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_department"
+              name="Departments"
+              action="action_department"
+              parent="menu_employee2"
+              sequence="6"
+    />
+</odoo>

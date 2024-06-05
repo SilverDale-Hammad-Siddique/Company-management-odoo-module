@@ -1,0 +1,101 @@
+<odoo>
+    <!-- Report Template -->
+    <template id="report_company_employee">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <header>
+                            <div class="header-section">
+                                <img src="/path/to/company_logo.png" alt="Company Logo"/>
+                                <h1>Employee Report</h1>
+                            </div>
+                        </header>
+                        <main>
+                            <div class="employee-details">
+                                <h2>Employee Information</h2>
+                                <ul>
+                                    <li>
+                                        <strong>Name:</strong>
+                                        <t t-esc="o.name"/>
+                                    </li>
+                                    <li>
+                                        <strong>Job Title:</strong>
+                                        <t t-esc="o.job_title"/>
+                                    </li>
+                                    <li>
+                                        <strong>Email:</strong>
+                                        <t t-esc="o.work_email"/>
+                                    </li>
+                                    <li>
+                                        <strong>Company:</strong>
+                                        <t t-esc="o.company_idd"/>
+                                    </li>
+                                    <li>
+                                        <strong>Department:</strong>
+                                        <t t-esc="o.department_idd"/>
+                                    </li>
+                                    <!-- Add more fields as needed -->
+                                    <li>
+                                        <strong>Parent:</strong>
+                                        <t t-esc="o.parent_id"/>
+                                    </li>
+                                    <li>
+                                        <strong>Coach:</strong>
+                                        <t t-esc="o.coach_id"/>
+                                    </li>
+                                    <li>
+                                        <strong>Job ID:</strong>
+                                        <t t-esc="o.job_id"/>
+                                    </li>
+                                    <li>
+                                        <strong>Work Phone:</strong>
+                                        <t t-esc="o.work_phone"/>
+                                    </li>
+                                    <li>
+                                        <strong>Work Mobile:</strong>
+                                        <t t-esc="o.mobile_phone"/>
+                                    </li>
+                                    <li>
+                                        <strong>Company ID:</strong>
+                                        <t t-esc="o.company_id"/>
+                                    </li>
+                                    <li>
+                                        <strong>Last Activity Time:</strong>
+                                        <t t-esc="o.last_activity_time"/>
+                                    </li>
+                                    <li>
+                                        <strong>Last Activity:</strong>
+                                        <t t-esc="o.last_activity"/>
+                                    </li>
+                                    <!-- Add all the fields here -->
+                                </ul>
+                            </div>
+                        </main>
+                        <footer>
+                            <div class="footer-section">
+
+                                <p>Page
+                                    <span class="page-number"/>
+                                </p>
+                            </div>
+                        </footer>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Action for Printing Employee Report -->
+    <record id="print_company_employee" model="ir.actions.report">
+        <field name="name">Print Employee</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">company_management.report_company_employee</field>
+        <field name="report_file">company_management.report_company_employee</field>
+        <!-- Uncomment below line to customize print report name -->
+        <!-- <field name="print_report_name">'Print Employees- %s' % (object.name).replace('/', '')</field> -->
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

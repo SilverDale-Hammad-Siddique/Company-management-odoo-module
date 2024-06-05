@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_employee">
+        <t t-call="web.html_container">
+            <t t-foreach="doc.employees" t-as="employee">
+                <div class="page">
+                    <h2 t-esc="employee['name']"/>
+                    <p>
+                        <strong>Job Title:</strong>
+                        <span t-esc="employee['job_title']"/>
+                    </p>
+                    <p>
+                        <strong>Department:</strong>
+                        <span t-esc="employee['department']"/>
+                    </p>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

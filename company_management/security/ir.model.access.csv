@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+company_management.access_company,access_company,company_management.model_company,base.group_user,1,1,1,1
+company_management.access_department,access_department,company_management.model_department,base.group_user,1,1,1,1
+company_management.access_project,access_project,company_management.model_project,base.group_user,1,1,1,1
+company_management.access_task,access_task,company_management.model_task,base.group_user,1,1,1,1
+company_management.access_report_task,access_report_task,company_management.model_report_task,base.group_user,1,1,1,1
+company_management.access_activity,access_activity,company_management.model_activity,base.group_user,1,1,1,1
+company_management.access_task_tag,access_task_tag,company_management.model_task_tag,base.group_user,1,1,1,1
+company_management.access_my_project_stage,access_my_project_stage,company_management.model_my_project_stage,base.group_user,1,1,1,1
+company_management.access_time_sheet_employee,access_time_sheet_employee,company_management.model_time_sheet_employee,base.group_user,1,1,1,1
+company_management.access_my_report,access_my_report,company_management.model_my_report,base.group_user,1,1,1,1
